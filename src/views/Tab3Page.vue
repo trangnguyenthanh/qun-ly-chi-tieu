@@ -15,6 +15,8 @@
       <ExploreContainer name="Tab 3 page" />
     </ion-content>
   </ion-page>
+
+  
 </template>
 
 <script setup lang="ts">
