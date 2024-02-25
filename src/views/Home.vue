@@ -100,7 +100,7 @@
             <ion-button color="dark" @click="clear()">C</ion-button>
             <ion-button @click="divide()"> ÷ </ion-button>
             <ion-button @click="multiply()">x</ion-button>
-            <ion-button @click="calculate()"> =</ion-button>
+            <ion-button color="danger" @click="calculate()"> =</ion-button>
 
             <ion-button color="medium" @click="appendNumber(1)">1</ion-button>
             <ion-button color="medium" @click="appendNumber(2)">2</ion-button>
@@ -114,7 +114,7 @@
             <ion-button color="medium" @click="appendNumber(7)">7</ion-button>
             <ion-button color="medium" @click="appendNumber(8)">8</ion-button>
             <ion-button color="medium" @click="appendNumber(9)">9</ion-button>
-            <ion-button @click="appendNumber(0)">0</ion-button>
+            <ion-button  color="medium" @click="appendNumber(0)">0</ion-button>
           </div>
           <ion-button
             color="success"
