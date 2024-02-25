@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <headerPage/>
-    
     <ion-content :scroll-y="true" style="">
       <div style="padding: 10px; height: 100%">
         <div style="text-align: center">

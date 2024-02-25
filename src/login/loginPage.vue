@@ -1,10 +1,14 @@
 <template>
   <div>
     <div id="topheader">
-      <h1 id="Title">sổ thu chi</h1>
+      <h1 id="Title">Sổ thu chi</h1>
+
     </div>
+
     <div id="Content">
+
       <h2>Xin Chào</h2>
+      
       <ion-input
         id="custom-input"
         fill="outline"
@@ -49,7 +53,8 @@
 
 <script setup lang="ts">
 import terms from "./terms.vue";
-import { IonModal, IonInput, IonButton,IonHeader, IonToolbar, IonTitle, } from "@ionic/vue";
+import { IonModal, IonInput, IonButton,IonHeader, IonToolbar, IonTitle, IonIcon, } from "@ionic/vue";
+import { walletOutline } from "ionicons/icons";
 import { ref } from "vue";
 
 const inputValue = ref("");

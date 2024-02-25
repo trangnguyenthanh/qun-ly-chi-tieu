@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <headerPage/>
-
     <ion-content :fullscreen="true" :scroll-y="true" style="background: #036E9B;width: 100%; text-align: center; ">
       <ion-item style="border-radius: 5px; font-size: 13px;">
         <ion-label style="font-weight: 600;">Danh mục : </ion-label>
@@ -14,7 +13,7 @@
 
       </div>
       <div style="text-align: center;">
-        <div v-if="filteredNotes && filteredNotes.length > 0" style="font-size: 10px;">
+        <div v-if="filteredNotes && filteredNotes.length > 0" style="font-size: 12px;">
           <ion-table v-if="filteredNotes.length > 0">
             <div style="margin: 5px 0px 10px 0px;">
               <ion-row class="table-header">
@@ -102,6 +101,6 @@ const filteredNotes = computed(() => {
   font-weight: bold;
 }
 .table-row {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
 }
 </style>
