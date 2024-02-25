@@ -19,9 +19,11 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/vue": "^7.0.0",
     "@ionic/vue-router": "^7.0.0",
+    "flowbite": "^2.3.0",
+    "flowbite-vue": "^0.1.2",
     "ionicons": "^7.0.0",
     "vue": "^3.3.0",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@capacitor/cli": "5.7.0",

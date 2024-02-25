@@ -5,7 +5,8 @@
     <ion-content :scroll-y="true" style="">
       <div style="padding: 10px; height: 100%">
         <div style="text-align: center">
-          <h2>Thêm vào ví</h2>
+          <h4>Thêm vào ví</h4>
+
         </div>
         <ion-input
           style="background-color: white ; "
@@ -14,8 +15,6 @@
           v-model="money"
           @click="showCalculator = true"
           @input="handleInput"
-
-
         >
           <div slot="label">
             Số tiền <ion-text color="danger">(VND)</ion-text>
@@ -25,6 +24,7 @@
         <div id="flex-container">
           <ion-datetime
             style="
+              border-radius: 10px;
               border: 1px solid black;
               align-items: center;
               justify-content: space-between;
@@ -34,16 +34,20 @@
             v-model="selectedDate"
             @ionChange="handleDateChange"
           ></ion-datetime>
+
+        
+
         </div>
         <ion-button style="margin-top: 10px" expand="block" @click="saveData">
           Lưu
         </ion-button>
+
       </div>
     </ion-content>
-    <div v-if="showCalculator" class="calculator" style=" display: flex; justify-content: center; height: 40%;" >
-    <hr>
+  <div v-if="showCalculator" id="calculator" style=" display: flex; justify-content: center; height: 40%; padding: 10px;border: 1px solid gray; border-radius: 10px;" >
+     <hr>
 
-     <div  style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; width: 80%; height: 100%;;" >
+     <div  style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; width: 80%; height: 100%;" >
         <ion-button color="dark" @click="clear()">C</ion-button>
         <ion-button @click="divide()"> ÷ </ion-button>
         <ion-button @click="multiply()">x</ion-button>
@@ -64,23 +68,53 @@
         <ion-button @click="appendNumber(0)">0</ion-button>
 
       
-    </div>
+     </div>
     <ion-button color="success" style="width: 100px;"  @click="showCalculator=false">  <ion-text style="font-size: 25px;" >Ok</ion-text></ion-button>
 
   </div>
+  <div v-if="showModalNotMoney" class="overlay"></div>
+  <div v-if="showSuccessModal" class="overlay"></div>
+
+  <div class="ShowModal" v-if="showModalNotMoney">
+          <div class="wrapper" style="width: 200px">
+            <h5 style="margin-bottom: 20px">
+             Số tiền không được để trống
+            </h5>
+            <ion-button
+              color="medium"
+              style="width: 100px"
+              @click="showModalNotMoney = false"
+            >
+              <ion-text style="font-size: 13px">Đóng</ion-text></ion-button
+            >
+          </div>
+        </div>
+        <div class="ShowModal" v-if="showSuccessModal">
+            <div class="wrapper" style="width: 200px">
+              <h5 style="margin-bottom: 20px">
+           Đã nhập dữ liệu
+              </h5>
+            <ion-icon color="success" style="font-size: 40px;" :icon="checkmarkCircleOutline">
+
+            </ion-icon>
+            </div>
+          </div>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonInput, IonButton, IonDatetime } from "@ionic/vue";
+import { IonPage, IonInput, IonButton, IonDatetime,IonContent } from "@ionic/vue";
 import { onMounted, ref } from "vue";
 import headerPage from "./headerPage.vue";
+import {  checkmarkCircleOutline } from "ionicons/icons";
+const money = ref('')
 
+const showModalNotMoney = ref<boolean>(false);
+  const showSuccessModal = ref<boolean>(false);
 
-
+ 
 
 const userName = ref<string>("");
-  const money = ref('')
 
 const selectedDate = ref<string>("");
 
@@ -90,9 +124,24 @@ onMounted(() => {
 
 const saveData = () => {
   const moneyValue = parseFloat(money.value || "0");
-
   let walletMoney = parseFloat(localStorage.getItem("walletMoney") || "0");
   walletMoney += moneyValue;
+
+
+if (money.value === '') {
+showModalNotMoney.value = true;
+setTimeout(() => {
+  showModalNotMoney.value = false;
+}, 1000);
+return;
+}
+showSuccessModal.value = true
+
+setTimeout(() => {
+showSuccessModal.value = false
+  
+},1000)
+
 
   const transaction = {
     amount: moneyValue,
@@ -106,10 +155,14 @@ const saveData = () => {
   localStorage.setItem("transactions", JSON.stringify(transactions));
   localStorage.setItem("walletMoney", walletMoney.toString());
 
-  money.value = "";
 
-  window.location.reload();
-};
+
+  setTimeout(() => {
+    window.location.reload()
+    
+  },800)
+
+}
 
 const handleDateChange = (event: CustomEvent) => {
   selectedDate.value = event.detail.value;
@@ -121,25 +174,17 @@ const showCalculator = ref<boolean>(false);
 const appendNumber = (number: number) => {
   money.value += number;
 };
-
 const add = () => {
   money.value += '+';
-
 };
-
 const subtract = () => {
   money.value += '-';
-
 };
-
 const multiply = () => {
   money.value += '*';
-
 };
-
 const divide = () => {
   money.value += '/';
-
 };
 const calculate = () => {
   try {
@@ -176,4 +221,26 @@ const handleInput = () => {
 #buttons{
   display: grid;
 }
+.ShowModal {
+  text-align: center;
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  color: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 20px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
 </style>

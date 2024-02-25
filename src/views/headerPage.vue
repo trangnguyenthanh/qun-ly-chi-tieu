@@ -5,11 +5,11 @@
         <div style="display: flex">
           <ion-icon
             style="position: relative; top: 2px; left: 15px"
-            size="large"
+            size="small"
             color="primary"
             :icon="peopleCircle"
           ></ion-icon>
-          <ion-title style="display: flex" color="tertiary">
+          <ion-title  style="display: flex; font-size: 10px;" color="tertiary">
             {{ userName }}
           </ion-title>
         </div>
