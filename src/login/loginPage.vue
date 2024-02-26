@@ -22,7 +22,7 @@
         id="nextHome"
         color="warning"
         @click="handleContinue"
-        :href="inputValue.trim() ? '/tab1' : null"
+        :href="inputValue.trim() ? '/tab1' : ''"
       >
         Tiếp tục
       </ion-button>
@@ -54,7 +54,6 @@
 <script setup lang="ts">
 import terms from "./terms.vue";
 import { IonModal, IonInput, IonButton,IonHeader, IonToolbar, IonTitle, IonIcon, } from "@ionic/vue";
-import { walletOutline } from "ionicons/icons";
 import { ref } from "vue";
 
 const inputValue = ref("");

@@ -239,7 +239,7 @@ import {  checkmarkCircleOutline } from "ionicons/icons";
 
 const userName = ref<string>("");
 const walletMomo = ref<string>("");
-const selectedCategory = ref<string | null>(null);
+const selectedCategory = ref<string>();
 
 const categories = ref([
   { id: 1, name: "Mua sắm", },
@@ -322,11 +322,9 @@ if(note.value === ''){
     return;
 
   }
+  const selectedCategoryName = categories.value.find((category) => category.id.toString() === selectedCategory.value)?.name;
 
 
-  const selectedCategoryName = categories.value.find(
-    (category) => category.id === selectedCategory.value
-  )?.name;
 
   const enteredAmount = Number(money.value);
   if (isNaN(enteredAmount) || enteredAmount <= 0) {
@@ -357,9 +355,9 @@ if(note.value === ''){
 
   localStorage.setItem("walletMoney", String(newWalletMoney));
 
-  let categoryTransactions = JSON.parse(
-    localStorage.getItem(selectedCategoryName) || "[]"
-  );
+  const categoryTransactions = JSON.parse(
+    localStorage.getItem(selectedCategoryName as string) || "[]"
+);
 
   categoryTransactions.push({
     note:note.value,
@@ -380,10 +378,8 @@ setTimeout(() => {
 note.value =''
 money.value = ''
 
-  localStorage.setItem(
-    selectedCategoryName,
-    JSON.stringify(categoryTransactions)
-  );
+localStorage.setItem(String(selectedCategoryName), JSON.stringify(categoryTransactions));
+
 
 
   setTimeout(() => {

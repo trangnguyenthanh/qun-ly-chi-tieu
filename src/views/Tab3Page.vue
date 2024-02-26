@@ -62,31 +62,38 @@ const categories = ref([
   { id: 10, name: "Trả nợ" },
 ]);
 
-const selectedNotes = ref([]);
-const searchText = ref('');
+const selectedNotes = ref<any>([]);
+const searchText = ref<string>('');
 
 function handleCategoryChange() {
-  const selectedCategoryName = selectedCategory.value;
+  const selectedCategoryName = selectedCategory.value ?? '';
+
   const dataFromLocalStorage = localStorage.getItem(selectedCategoryName);
   selectedNotes.value = dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : [];
 }
 
-function formatDate(dateString: any) {
-  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
-}
+const options: Intl.DateTimeFormatOptions = { 
+    year: 'numeric', 
+    month: '2-digit', 
+    day: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit' 
+};
 
+function formatDate(dateString: any): string {
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
 function formatAmount(amount: any) {
   return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 
 const filteredNotes = computed(() => {
-  let filtered = selectedNotes.value;
+  let filtered = selectedNotes.value || [];
 
   if (searchText.value) {
     const searchTerm = searchText.value.toLowerCase();
-    filtered = filtered.filter(note => {
+    filtered = filtered.filter((note: { note: string, amount: number }) => {
       return note.note.toLowerCase().includes(searchTerm) || note.amount.toString().includes(searchTerm);
     });
   }
