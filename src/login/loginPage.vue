@@ -22,7 +22,7 @@
         id="nextHome"
         color="warning"
         @click="handleContinue"
-        :href="inputValue.trim() ? '/' : null"
+        :href="inputValue.trim() ? '/' : ''"
       >
         Tiếp tục
       </ion-button>
