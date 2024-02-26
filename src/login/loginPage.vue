@@ -32,7 +32,7 @@
         Bằng việc ấn và tiếp tục, bạn đã đồng ý với
         <br />
         <span id="open-modal" @click="openModal"
-          >điều khoản và điều kiện sử dụng</span
+          >điều khoản và điều kiện sử dụng .</span
         >
       </p>
     </div>
