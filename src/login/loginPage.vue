@@ -22,7 +22,7 @@
         id="nextHome"
         color="warning"
         @click="handleContinue"
-        :href="inputValue.trim() ? '/tab1' : ''"
+        :href="inputValue.trim() ? '/' : null"
       >
         Tiếp tục
       </ion-button>
@@ -32,7 +32,7 @@
         Bằng việc ấn và tiếp tục, bạn đã đồng ý với
         <br />
         <span id="open-modal" @click="openModal"
-          >điều khoản và điều kiện sử dụng .</span
+          >điều khoản và điều kiện sử dụng</span
         >
       </p>
     </div>
@@ -54,6 +54,7 @@
 <script setup lang="ts">
 import terms from "./terms.vue";
 import { IonModal, IonInput, IonButton,IonHeader, IonToolbar, IonTitle, IonIcon, } from "@ionic/vue";
+import { walletOutline } from "ionicons/icons";
 import { ref } from "vue";
 
 const inputValue = ref("");
