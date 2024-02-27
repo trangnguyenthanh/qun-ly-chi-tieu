@@ -22,7 +22,7 @@
         id="nextHome"
         color="warning"
         @click="handleContinue"
-        :href="inputValue.trim() ? '/' : ''"
+        :href="inputValue.trim() ? '/tab1' : ''"
       >
         Tiếp tục
       </ion-button>
